@@ -59,6 +59,7 @@ const quizData = [
 ];
 
 // Get Elements
+const quiz = document.getElementById("quiz");
 const questionEl = document.getElementById("question");
 const answerEls = document.querySelectorAll(".answer");
 
@@ -112,14 +113,14 @@ submitBtn.addEventListener("click", () => {
   if (answer) {
     if (answer === quizData[currentQuiz].correct) {
       score++;
-      currentQuiz++;
       console.log(score);
     }
+    currentQuiz++;
     if (currentQuiz < quizData.length) {
       loadQuiz();
     } else {
       // Show: Results
-      alert("You finished! Get yourself an Orange Lemonade");
+      quiz.innerHTML = `<h2>You answered correctly at ${score}/${quizData.length} questions.</h2>`;
     }
   }
 });
