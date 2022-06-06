@@ -1,3 +1,4 @@
+// Quiz Data
 const quizData = [
   {
     question: "What does HTML stand for?",
@@ -40,13 +41,6 @@ const quizData = [
     correct: "d",
   },
   {
-    question: "What is the correct HTML tag for inserting a line break?",
-    a: "<br>",
-    b: "<lb>",
-    c: "<break>",
-    correct: "a",
-  },
-  {
     question: "What is the correct HTML for creating a hyperlink?",
     a: "<a url='http://www.w3schools.com'>W3Schools.com</a>",
     b: "<a name='http://www.w3schools.com'>W3Schools.com</a>",
@@ -63,3 +57,69 @@ const quizData = [
     correct: "b",
   },
 ];
+
+// Get Elements
+const questionEl = document.getElementById("question");
+const answerEls = document.querySelectorAll(".answer");
+
+const a_text = document.getElementById("a_text");
+const b_text = document.getElementById("b_text");
+const c_text = document.getElementById("c_text");
+const d_text = document.getElementById("d_text");
+
+const submitBtn = document.getElementById("submit");
+
+let currentQuiz = 0;
+let score = 0;
+// Loadquiz: question and answers
+
+function loadQuiz() {
+  deselectAnswers();
+
+  const currentQuizData = quizData[currentQuiz];
+
+  questionEl.innerHTML = currentQuizData.question;
+  a_text.innerText = currentQuizData.a;
+  b_text.innerText = currentQuizData.b;
+  c_text.innerText = currentQuizData.c;
+  d_text.innerText = currentQuizData.d;
+}
+loadQuiz();
+//
+function getSelected() {
+  let answer = undefined;
+
+  answerEls.forEach((answerEl) => {
+    if (answerEl.checked) {
+      answer = answerEl.id;
+    }
+  });
+  return answer;
+}
+
+// Deselect answer
+function deselectAnswers() {
+  answerEls.forEach((answerEl) => {
+    answerEl.checked = false;
+  });
+}
+
+// submmit functionality for Submit button
+submitBtn.addEventListener("click", () => {
+  // check to see the answer
+  const answer = getSelected();
+
+  if (answer) {
+    if (answer === quizData[currentQuiz].correct) {
+      score++;
+      currentQuiz++;
+      console.log(score);
+    }
+    if (currentQuiz < quizData.length) {
+      loadQuiz();
+    } else {
+      // Show: Results
+      alert("You finished! Get yourself an Orange Lemonade");
+    }
+  }
+});
