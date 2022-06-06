@@ -120,7 +120,7 @@ submitBtn.addEventListener("click", () => {
       loadQuiz();
     } else {
       // Show: Results
-      quiz.innerHTML = `<h2>You answered correctly at ${score}/${quizData.length} questions.</h2>`;
+      quiz.innerHTML = `<h2>You answered correctly at ${score}/${quizData.length} questions.</h2> <button onClick="location.reload()">Retake quiz</button>`;
     }
   }
 });
